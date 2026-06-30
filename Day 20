@@ -11,6 +11,7 @@ df.shape
 A. Countplot
 
 sns.countplot(x='Embarked',data=df)
+         or
 df['Sex'].value_counts().plot(kind='bar')
 
 
