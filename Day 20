@@ -1,0 +1,40 @@
+import pandas as pd
+import seaborn as sns
+df=pd.read_csv('/content/Titanic-Dataset.csv')
+df.head()
+df.shape
+
+
+1. Categorical Data
+
+
+A. Countplot
+
+sns.countplot(x='Embarked',data=df)
+df['Sex'].value_counts().plot(kind='bar')
+
+
+
+B. Pie Chart
+df['Embarked'].value_counts().plot(kind='pie',autopct='%.2f')
+
+
+
+2. Numberical Data
+
+
+A. Histogram
+import matplotlib.pyplot as plt
+plt.hist(df['Age'],bins=10)
+
+B. Displot
+sns.displot(df['Age'],)
+
+C. Boxplot
+sns.boxplot(df['Fare'])
+
+
+df['Age'].max()  # For Maximum value
+df['Age'].min()  # For minimum Value
+df['Age'].mean() # For mean Value
+
