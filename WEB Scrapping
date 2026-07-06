@@ -1,0 +1,487 @@
+# 📚 Machine Learning - Data Gathering
+
+# Chapter 4 - Web Scraping (Complete Beginner Notes)
+
+---
+
+# What is Web Scraping?
+
+**Web Scraping** is the process of automatically extracting data from websites using programming.
+
+Instead of manually copying data from a website, Python can collect it automatically.
+
+Example:
+
+Website
+
+↓
+
+Python
+
+↓
+
+Extract Data
+
+↓
+
+Store in CSV / Database / DataFrame
+
+---
+
+# Real Life Example
+
+Suppose you want information about 10,000 laptops from Flipkart.
+
+For every laptop, you need:
+
+* Name
+* Price
+* Rating
+* Reviews
+
+Doing this manually is almost impossible.
+
+Using Web Scraping, Python can collect all this data automatically.
+
+---
+
+# Real World Uses
+
+Web Scraping is used in:
+
+* Price Comparison Websites
+* E-commerce Analysis
+* News Collection
+* Job Portals
+* Stock Market Data
+* Research Projects
+* Machine Learning Data Collection
+
+Examples:
+
+* Amazon
+* Flipkart
+* Zomato
+* Real Estate Websites
+* News Websites
+
+---
+
+# Data Gathering Sources
+
+There are four major sources of data:
+
+```text id="hry2ik"
+CSV File
+      ↓
+JSON / API
+      ↓
+SQL Database
+      ↓
+Website (Web Scraping)
+```
+
+---
+
+# How Web Scraping Works
+
+```text id="2lnqku"
+Website
+      ↓
+HTTP Request
+      ↓
+HTML Page
+      ↓
+BeautifulSoup
+      ↓
+Extract Required Data
+      ↓
+Pandas DataFrame
+      ↓
+CSV / Excel / Machine Learning
+```
+
+---
+
+# What is HTML?
+
+Every website is made using HTML (HyperText Markup Language).
+
+Example:
+
+```html id="9oqz8v"
+<html>
+  <body>
+      <h1>iPhone 16</h1>
+      <p>Price : ₹80,000</p>
+  </body>
+</html>
+```
+
+The browser converts HTML into a webpage.
+
+In Web Scraping, Python reads the HTML instead of what you visually see.
+
+---
+
+# Libraries Required
+
+```python id="8klbq2"
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+```
+
+Explanation:
+
+requests → Downloads the webpage.
+
+BeautifulSoup → Reads and parses HTML.
+
+pandas → Converts extracted data into a DataFrame.
+
+---
+
+# Step 1 - Choose a Website
+
+Example:
+
+```python id="gtn7lr"
+url = "https://books.toscrape.com/"
+```
+
+This website is specially made for learning web scraping.
+
+---
+
+# Step 2 - Send a Request
+
+```python id="gf0s1f"
+response = requests.get(url)
+```
+
+Flow:
+
+```text id="ljlwmw"
+Python
+      ↓
+Website
+      ↓
+HTML Response
+```
+
+---
+
+# Step 3 - Check Status Code
+
+```python id="dwnvn6"
+print(response.status_code)
+```
+
+Common Status Codes:
+
+200 → Success
+
+404 → Page Not Found
+
+403 → Access Forbidden
+
+500 → Server Error
+
+If the output is 200, the request was successful.
+
+---
+
+# Step 4 - View HTML Source
+
+```python id="ovkkf2"
+print(response.text)
+```
+
+Output:
+
+```html id="elamq5"
+<html>
+  ...
+</html>
+```
+
+This is the complete HTML source code of the webpage.
+
+---
+
+# Step 5 - Create a BeautifulSoup Object
+
+```python id="u0r3uz"
+soup = BeautifulSoup(response.text, "html.parser")
+```
+
+Explanation:
+
+response.text → HTML Code
+
+html.parser → HTML Parser
+
+BeautifulSoup converts HTML into an object that Python can search.
+
+---
+
+# Step 6 - Find an Element
+
+Example:
+
+```python id="55fjlwm"
+title = soup.find("h1")
+
+print(title.text)
+```
+
+Output:
+
+```text id="qn07ra"
+Books
+```
+
+`find()` returns only the first matching element.
+
+---
+
+# Step 7 - Find Multiple Elements
+
+```python id="mhywj0"
+books = soup.find_all("h3")
+```
+
+Loop through all elements:
+
+```python id="jlwmq0"
+for book in books:
+    print(book.text)
+```
+
+`find_all()` returns all matching elements as a list.
+
+---
+
+# HTML Example
+
+```html id="uyhnla"
+<h2>Python Book</h2>
+
+<h2>Machine Learning</h2>
+
+<h2>Deep Learning</h2>
+```
+
+Python:
+
+```python id="mjlwm0"
+books = soup.find_all("h2")
+
+for book in books:
+    print(book.text)
+```
+
+Output:
+
+```text id="94aixz"
+Python Book
+
+Machine Learning
+
+Deep Learning
+```
+
+---
+
+# Finding Data Using Class
+
+HTML
+
+```html id="s7j3va"
+<p class="price">₹499</p>
+```
+
+Python
+
+```python id="u2znjo"
+price = soup.find("p", class_="price")
+
+print(price.text)
+```
+
+Output:
+
+```text id="d3w2eq"
+₹499
+```
+
+Note:
+
+In Python we write `class_` because `class` is a reserved keyword.
+
+---
+
+# Extract Multiple Products
+
+```python id="4mjlwm"
+products = soup.find_all("article")
+
+for product in products:
+    print(product.text)
+```
+
+This extracts all product information from the webpage.
+
+---
+
+# Store Data in Lists
+
+Example:
+
+```python id="tjnuzl"
+names = []
+
+prices = []
+
+names.append("Python Book")
+
+prices.append(499)
+```
+
+---
+
+# Convert into DataFrame
+
+```python id="jlwmq2"
+df = pd.DataFrame({
+    "Book Name": names,
+    "Price": prices
+})
+
+print(df)
+```
+
+Output:
+
+| Book Name   | Price |
+| ----------- | ----: |
+| Python Book |   499 |
+
+---
+
+# Save Data into CSV
+
+```python id="pd5jlwm"
+df.to_csv("books.csv", index=False)
+```
+
+Now the scraped data is saved as a CSV file.
+
+---
+
+# Complete Workflow
+
+```text id="i8qrx0"
+Website URL
+       ↓
+requests.get()
+       ↓
+HTML Response
+       ↓
+BeautifulSoup()
+       ↓
+find() / find_all()
+       ↓
+Extract Required Data
+       ↓
+Store in Lists
+       ↓
+Pandas DataFrame
+       ↓
+CSV / Excel / SQL / Machine Learning
+```
+
+---
+
+# Difference Between API and Web Scraping
+
+| API                       | Web Scraping                   |
+| ------------------------- | ------------------------------ |
+| Data comes in JSON format | Data comes in HTML format      |
+| Official way to get data  | Reads webpage HTML             |
+| Faster                    | Slightly slower                |
+| Easier                    | More complex                   |
+| Stable                    | Website changes can break code |
+
+---
+
+# When to Use API?
+
+Use an API if:
+
+* The website provides an official API.
+* Data is available in JSON format.
+* Authentication is available.
+
+---
+
+# When to Use Web Scraping?
+
+Use Web Scraping if:
+
+* No API is available.
+* Data is only visible on the website.
+* The website allows scraping according to its Terms of Service and robots.txt.
+
+---
+
+# Interview Questions
+
+1. What is Web Scraping?
+2. Why is Web Scraping used?
+3. What is HTML?
+4. Why do we use the requests library?
+5. Why do we use BeautifulSoup?
+6. Difference between `find()` and `find_all()`.
+7. Why do we convert scraped data into a Pandas DataFrame?
+8. Difference between API and Web Scraping.
+
+---
+
+# Quick Revision
+
+* Web Scraping = Automatically collecting data from websites.
+* `requests` downloads the webpage.
+* `BeautifulSoup` parses HTML.
+* `find()` returns the first matching element.
+* `find_all()` returns all matching elements.
+* Store extracted data in lists.
+* Convert lists into a Pandas DataFrame.
+* Save data into CSV, Excel, SQL, or use it for Machine Learning.
+
+---
+
+# Golden Formula
+
+```text id="yjlwm3"
+Website
+    ↓
+requests.get()
+    ↓
+HTML
+    ↓
+BeautifulSoup()
+    ↓
+find() / find_all()
+    ↓
+Extract Data
+    ↓
+Python Lists
+    ↓
+Pandas DataFrame
+    ↓
+CSV / SQL / Machine Learning
+```
+
+
