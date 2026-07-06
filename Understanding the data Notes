@@ -1,0 +1,457 @@
+# 📚 Pandas - `df.describe()` (Complete Beginner Notes)
+
+---
+
+# What is `df.describe()`?
+
+`df.describe()` is a Pandas function that provides a **statistical summary** of all numerical columns in a dataset.
+
+Instead of looking at every row manually, it gives important statistics in one table.
+
+Syntax:
+
+```python
+df.describe()
+```
+
+---
+
+# Why do we use `df.describe()`?
+
+Suppose a dataset has 10,000 rows.
+
+It is impossible to calculate the average, minimum, maximum, etc. manually.
+
+`df.describe()` automatically calculates all important statistics.
+
+Example:
+
+```python
+df.describe()
+```
+
+Output:
+
+```text
+             Age      Fare
+count      714.0    891.0
+mean        29.7     32.2
+std         14.5     49.7
+min          0.42      0
+25%         20
+50%         28
+75%         38
+max         80      512
+```
+
+---
+
+# Understanding Every Row
+
+## 1. count
+
+Example:
+
+```text
+Age
+
+714
+```
+
+Meaning:
+
+There are **714 available (non-missing) values** in the Age column.
+
+If the dataset has 891 rows, then:
+
+```text
+891 - 714 = 177
+```
+
+There are **177 missing values** in the Age column.
+
+Formula:
+
+```text
+Count = Number of non-missing values
+```
+
+---
+
+## 2. mean (Average)
+
+Example:
+
+```text
+Age
+
+29.7
+```
+
+Meaning:
+
+The average age of passengers is approximately **29.7 years**.
+
+Formula:
+
+```text
+Mean = Sum of all values ÷ Number of values
+```
+
+Example:
+
+```text
+20
+
+25
+
+30
+
+35
+```
+
+Average:
+
+```text
+(20 + 25 + 30 + 35) ÷ 4
+
+= 27.5
+```
+
+---
+
+## 3. std (Standard Deviation)
+
+Standard Deviation tells us **how spread out the data is from the average (mean).**
+
+### Low Standard Deviation
+
+```text
+50
+
+50
+
+50
+
+50
+
+50
+```
+
+All values are almost the same.
+
+Standard Deviation = Low
+
+---
+
+### High Standard Deviation
+
+```text
+5
+
+95
+
+10
+
+100
+
+50
+```
+
+Values are very different.
+
+Standard Deviation = High
+
+Meaning:
+
+* Low STD → Data is close to the average.
+* High STD → Data is widely spread.
+
+---
+
+## 4. min (Minimum)
+
+Example:
+
+```text
+Age
+
+0.42
+```
+
+Meaning:
+
+The smallest value in the Age column is **0.42 years**.
+
+Formula:
+
+```text
+Minimum = Smallest value in the column
+```
+
+---
+
+## 5. 25% (First Quartile - Q1)
+
+Meaning:
+
+25% of the values are **less than or equal to this value**.
+
+Example:
+
+```text
+1
+
+2
+
+5
+
+10
+
+15
+
+20
+
+25
+
+30
+
+40
+
+60
+```
+
+25% Value:
+
+```text
+20
+```
+
+Meaning:
+
+25% of passengers are **20 years old or younger**.
+
+---
+
+## 6. 50% (Median)
+
+This is also called the **Median**.
+
+Meaning:
+
+The middle value after arranging the data in ascending order.
+
+Example:
+
+```text
+10
+
+20
+
+30
+
+40
+
+50
+```
+
+Median:
+
+```text
+30
+```
+
+Meaning:
+
+* 50% of values are below the median.
+* 50% of values are above the median.
+
+In the Titanic dataset:
+
+```text
+Median Age = 28
+```
+
+Half of the passengers are younger than 28 years and half are older.
+
+---
+
+## 7. 75% (Third Quartile - Q3)
+
+Meaning:
+
+75% of the values are **less than or equal to this value**.
+
+Example:
+
+```text
+75% = 38
+```
+
+Meaning:
+
+75% of passengers are **38 years old or younger**.
+
+Only 25% of passengers are older than 38.
+
+---
+
+## 8. max (Maximum)
+
+Example:
+
+```text
+Age
+
+80
+```
+
+Meaning:
+
+The largest value in the column.
+
+The oldest passenger was **80 years old**.
+
+Formula:
+
+```text
+Maximum = Largest value in the column
+```
+
+---
+
+# Example
+
+Suppose we have the following data:
+
+```text
+10
+
+20
+
+30
+
+40
+
+50
+```
+
+Then `describe()` will return:
+
+| Statistic    |          Value |
+| ------------ | -------------: |
+| count        |              5 |
+| mean         |             30 |
+| std          | Spread of data |
+| min          |             10 |
+| 25%          |             20 |
+| 50% (Median) |             30 |
+| 75%          |             40 |
+| max          |             50 |
+
+---
+
+# Why Does `df.describe()` Work Only on Numerical Columns?
+
+Example:
+
+```text
+Utkarsh
+
+Rahul
+
+Aman
+```
+
+Can we calculate the average of names?
+
+No.
+
+Therefore, by default, `df.describe()` works only on numerical columns.
+
+To summarize text (categorical) columns:
+
+```python
+df.describe(include="object")
+```
+
+This returns:
+
+* count
+* unique
+* top (most frequent value)
+* freq (frequency of the most frequent value)
+
+---
+
+# Real-Life Analogy
+
+Imagine a doctor preparing a health report for patients.
+
+Instead of checking every patient individually, the doctor creates one summary.
+
+Similarly, `df.describe()` creates a summary of the numerical data.
+
+```text
+count  → How many values are available?
+
+mean   → Average value
+
+std    → How much the values vary
+
+min    → Smallest value
+
+25%    → First Quartile (Q1)
+
+50%    → Median
+
+75%    → Third Quartile (Q3)
+
+max    → Largest value
+```
+
+---
+
+# Interview Definition
+
+`df.describe()` is a Pandas function that provides a statistical summary of numerical columns. It returns **count, mean, standard deviation, minimum, quartiles (25%, 50%, 75%), and maximum**, helping us quickly understand the distribution and characteristics of the data.
+
+---
+
+# Quick Revision
+
+* `count` → Number of non-missing values.
+* `mean` → Average of the values.
+* `std` → How much the data is spread around the average.
+* `min` → Smallest value.
+* `25%` → First Quartile (Q1).
+* `50%` → Median (middle value).
+* `75%` → Third Quartile (Q3).
+* `max` → Largest value.
+
+---
+
+# Golden Formula
+
+```text
+df.describe()
+
+↓
+
+Statistical Summary
+
+↓
+
+count
+mean
+std
+min
+25%
+50%
+75%
+max
+
+↓
+
+Understand the numerical data before building a Machine Learning model.
+```
