@@ -1,0 +1,437 @@
+# 📚 Machine Learning - Data Gathering
+
+# Chapter 3 - Fetching Data from API (Step-by-Step)
+
+---
+
+# What is an API?
+
+**API (Application Programming Interface)** is a medium through which two applications communicate with each other.
+
+Example:
+
+When you open a weather app, the app does not know the weather itself. It sends a request to a server through an API, and the server sends back the data.
+
+Flow:
+
+```text
+User
+   ↓
+Application
+   ↓
+API Request
+   ↓
+Server
+   ↓
+JSON Response
+   ↓
+Application
+```
+
+---
+
+# What is API Fetching?
+
+API Fetching means requesting data from a server and receiving the response.
+
+Most APIs return data in **JSON format**.
+
+---
+
+# Real World Examples of APIs
+
+* Weather Apps
+* Google Maps
+* Swiggy
+* Zomato
+* Amazon
+* Instagram
+* YouTube
+* Chat Applications
+* Stock Market Apps
+
+---
+
+# Step 1 - Find an API
+
+First, search for a free public API.
+
+Examples:
+
+* JSONPlaceholder
+* DummyJSON
+* Open-Meteo
+* PokéAPI
+* ExchangeRate API
+
+Suppose we choose DummyJSON.
+
+API URL:
+
+```text
+https://dummyjson.com/products
+```
+
+---
+
+# Step 2 - Read the API Documentation
+
+Every API provides documentation.
+
+Documentation tells you:
+
+* Base URL
+* Endpoints
+* Request Method (GET, POST, etc.)
+* Parameters
+* Authentication (API Key or Token)
+* Response Format
+
+Example:
+
+```text
+GET https://dummyjson.com/products
+```
+
+Meaning:
+
+Get all product data.
+
+---
+
+# Step 3 - Test the API in Your Browser
+
+Open the API URL in your browser:
+
+```text
+https://dummyjson.com/products
+```
+
+You will see a JSON response like:
+
+```json
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "Essence Mascara",
+      "price": 9.99
+    }
+  ]
+}
+```
+
+This is called the **API Response**.
+
+---
+
+# Step 4 - Import Required Libraries
+
+```python
+import requests
+import pandas as pd
+```
+
+Explanation:
+
+* requests → Sends requests to APIs.
+* pandas → Converts data into a DataFrame.
+
+---
+
+# Step 5 - Store the API URL
+
+```python
+url = "https://dummyjson.com/products"
+```
+
+---
+
+# Step 6 - Send a GET Request
+
+```python
+response = requests.get(url)
+```
+
+What happens?
+
+```text
+Python Program
+        ↓
+requests.get()
+        ↓
+Internet
+        ↓
+API Server
+```
+
+The server receives the request and sends data back.
+
+---
+
+# Step 7 - Check Status Code
+
+```python
+print(response.status_code)
+```
+
+Common Status Codes:
+
+* 200 → Success
+* 404 → URL Not Found
+* 401 → Unauthorized
+* 403 → Forbidden
+* 500 → Internal Server Error
+
+If the output is:
+
+```python
+200
+```
+
+It means the request was successful.
+
+---
+
+# Step 8 - Convert Response into JSON
+
+```python
+data = response.json()
+```
+
+Now the JSON response becomes a Python Dictionary.
+
+---
+
+# Step 9 - Check the JSON Keys
+
+```python
+print(data.keys())
+```
+
+Output:
+
+```python
+dict_keys(['products', 'total', 'skip', 'limit'])
+```
+
+The actual product data is stored inside the **products** key.
+
+---
+
+# Step 10 - Extract the Required Data
+
+```python
+products = data["products"]
+```
+
+Now only the product list is stored in the variable.
+
+---
+
+# Step 11 - Convert into a DataFrame
+
+```python
+df = pd.DataFrame(products)
+```
+
+Now the API data becomes a Pandas DataFrame.
+
+---
+
+# Step 12 - Display the Data
+
+```python
+print(df.head())
+```
+
+Example Output:
+
+| id | title             | price | category |
+| -- | ----------------- | ----: | -------- |
+| 1  | Essence Mascara   |  9.99 | beauty   |
+| 2  | Eyeshadow Palette | 19.99 | beauty   |
+
+---
+
+# Complete Code
+
+```python
+import requests
+import pandas as pd
+
+# API URL
+url = "https://dummyjson.com/products"
+
+# Send GET Request
+response = requests.get(url)
+
+# Check Request Status
+print(response.status_code)
+
+# Convert Response to JSON
+data = response.json()
+
+# Extract Products
+products = data["products"]
+
+# Convert to DataFrame
+df = pd.DataFrame(products)
+
+# Display First Five Rows
+print(df.head())
+```
+
+---
+
+# Complete Flow
+
+```text
+Find API
+      ↓
+Read Documentation
+      ↓
+Copy API URL
+      ↓
+requests.get(url)
+      ↓
+Server Response
+      ↓
+response.json()
+      ↓
+Python Dictionary
+      ↓
+Extract Required Data
+      ↓
+pd.DataFrame()
+      ↓
+Data Analysis / Machine Learning
+```
+
+---
+
+# Common HTTP Methods
+
+### GET
+
+Used to retrieve data.
+
+Examples:
+
+* Get Products
+* Get Users
+* Get Weather
+* Get News
+
+```python
+requests.get(url)
+```
+
+---
+
+### POST
+
+Used to send new data.
+
+Examples:
+
+* Login
+* Signup
+* Upload Image
+* Create Order
+
+```python
+requests.post(url)
+```
+
+---
+
+### PUT
+
+Used to update existing data.
+
+Example:
+
+Update Profile.
+
+```python
+requests.put(url)
+```
+
+---
+
+### DELETE
+
+Used to delete data.
+
+Example:
+
+Delete User.
+
+```python
+requests.delete(url)
+```
+
+---
+
+# API Key
+
+Some APIs require an API Key.
+
+Example:
+
+```text
+https://api.example.com/weather?apikey=YOUR_API_KEY
+```
+
+The API Key identifies and authorizes your application.
+
+---
+
+# Interview Questions
+
+1. What is an API?
+2. What is API Fetching?
+3. What is the difference between Request and Response?
+4. Why do we use the requests library?
+5. What does `requests.get()` do?
+6. What does `response.json()` do?
+7. Why do we check `status_code`?
+8. Why do we convert JSON into a DataFrame?
+9. What is an API Key?
+10. What are GET, POST, PUT, and DELETE?
+
+---
+
+# Quick Revision
+
+* API = Medium for communication between applications.
+* APIs usually return data in JSON format.
+* `requests.get()` sends a GET request.
+* `response.status_code` checks whether the request was successful.
+* `response.json()` converts JSON into a Python Dictionary.
+* Extract the required key from the dictionary.
+* Use `pd.DataFrame()` to convert the data into a DataFrame.
+* Analyze the data using Pandas.
+
+---
+
+# Golden Formula
+
+```text
+API URL
+    ↓
+requests.get()
+    ↓
+Response
+    ↓
+response.json()
+    ↓
+Python Dictionary
+    ↓
+Extract Required Data
+    ↓
+pd.DataFrame()
+    ↓
+Machine Learning / Data Analysis
+```
