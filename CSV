@@ -1,0 +1,626 @@
+# 📘 Machine Learning - Data Gathering (Working with CSV) Complete Notes
+
+# Chapter 1 - Working with CSV Files
+
+## 1. What is CSV?
+
+**CSV (Comma Separated Values)** is a file format used to store data in a tabular form (rows and columns).
+
+The values are separated by commas (,).
+
+Example:
+
+```text
+Name,Age,Marks
+Utkarsh,20,95
+Rahul,21,88
+Aman,19,91
+```
+
+In the above example:
+
+* First row = Header (Column Names)
+* Remaining rows = Records (Actual Data)
+
+---
+
+# 2. Why is CSV used?
+
+Machine Learning models need data.
+
+Most beginner and intermediate datasets are stored in CSV format because:
+
+* Easy to create
+* Easy to read
+* Small file size
+* Supported by almost every programming language
+* Works directly with Pandas
+
+Common ML datasets in CSV format:
+
+* Titanic Dataset
+* House Price Dataset
+* Iris Dataset
+* Diabetes Dataset
+* Placement Dataset
+
+---
+
+# 3. CSV vs Excel
+
+| CSV               | Excel                   |
+| ----------------- | ----------------------- |
+| Extension: .csv   | Extension: .xlsx        |
+| Plain text file   | Binary file             |
+| One sheet only    | Multiple sheets         |
+| Faster            | Slightly slower         |
+| Mostly used in ML | Mostly used in Business |
+
+---
+
+# 4. Structure of a CSV File
+
+Example:
+
+```text
+Name,Age,City
+Utkarsh,20,Lucknow
+Rahul,21,Kanpur
+Aman,19,Delhi
+```
+
+Explanation:
+
+Header
+
+```
+Name,Age,City
+```
+
+Records
+
+```
+Utkarsh,20,Lucknow
+Rahul,21,Kanpur
+Aman,19,Delhi
+```
+
+Rows = 3
+
+Columns = 3
+
+---
+
+# 5. What is Pandas?
+
+Pandas is a Python library used to work with datasets.
+
+It helps us:
+
+* Read data
+* Modify data
+* Analyze data
+* Clean data
+* Prepare data for Machine Learning
+
+Import Pandas:
+
+```python
+import pandas as pd
+```
+
+Here,
+
+* pandas = Library Name
+* pd = Short Name (Alias)
+
+---
+
+# 6. Reading a CSV File
+
+Syntax
+
+```python
+import pandas as pd
+
+df = pd.read_csv("students.csv")
+```
+
+Explanation:
+
+pd → Pandas Library
+
+read_csv() → Reads CSV File
+
+students.csv → File Name
+
+df → DataFrame
+
+---
+
+# 7. What is a DataFrame?
+
+A DataFrame is a 2-dimensional table in Pandas.
+
+It looks similar to an Excel sheet.
+
+Example
+
+| Name    | Age | Marks |
+| ------- | --- | ----- |
+| Utkarsh | 20  | 95    |
+| Rahul   | 21  | 88    |
+
+Whenever we read a CSV file using read_csv(), Pandas stores the data inside a DataFrame.
+
+---
+
+# 8. Viewing Data
+
+## head()
+
+Shows the first 5 rows.
+
+```python
+df.head()
+```
+
+First 10 rows
+
+```python
+df.head(10)
+```
+
+---
+
+## tail()
+
+Shows the last 5 rows.
+
+```python
+df.tail()
+```
+
+Last 10 rows
+
+```python
+df.tail(10)
+```
+
+---
+
+# 9. Shape of Dataset
+
+```python
+df.shape
+```
+
+Example Output
+
+```python
+(100,4)
+```
+
+Meaning
+
+100 Rows
+
+4 Columns
+
+---
+
+# 10. Column Names
+
+```python
+df.columns
+```
+
+Output
+
+```python
+Index(['Name','Age','Marks'])
+```
+
+Returns all column names.
+
+---
+
+# 11. Data Types
+
+```python
+df.dtypes
+```
+
+Example
+
+```text
+Name      object
+Age       int64
+Marks     float64
+```
+
+Meaning
+
+object → String
+
+int64 → Integer
+
+float64 → Decimal Number
+
+---
+
+# 12. Dataset Information
+
+```python
+df.info()
+```
+
+It shows
+
+* Number of rows
+* Number of columns
+* Data type of each column
+* Missing values
+* Memory usage
+
+---
+
+# 13. Statistical Summary
+
+```python
+df.describe()
+```
+
+Shows
+
+* Count
+* Mean
+* Standard Deviation
+* Minimum
+* Maximum
+* 25%
+* 50%
+* 75%
+
+Works only for numerical columns.
+
+---
+
+# 14. Missing Values
+
+Check missing values
+
+```python
+df.isnull()
+```
+
+Total missing values
+
+```python
+df.isnull().sum()
+```
+
+---
+
+# 15. Duplicate Values
+
+Check duplicate rows
+
+```python
+df.duplicated()
+```
+
+Total duplicate rows
+
+```python
+df.duplicated().sum()
+```
+
+---
+
+# 16. Selecting Columns
+
+Single Column
+
+```python
+df["Age"]
+```
+
+or
+
+```python
+df.Age
+```
+
+Multiple Columns
+
+```python
+df[["Name","Marks"]]
+```
+
+---
+
+# 17. Selecting Rows
+
+First Row
+
+```python
+df.iloc[0]
+```
+
+Second Row
+
+```python
+df.iloc[1]
+```
+
+Rows 2 to 5
+
+```python
+df.iloc[2:5]
+```
+
+---
+
+# 18. Saving a CSV File
+
+```python
+df.to_csv("new_file.csv")
+```
+
+This creates a new CSV file.
+
+---
+
+# 19. Important Parameters of read_csv()
+
+## usecols
+
+Reads only selected columns.
+
+```python
+df = pd.read_csv("students.csv", usecols=["Name","Marks"])
+```
+
+---
+
+## nrows
+
+Reads only the first n rows.
+
+```python
+df = pd.read_csv("students.csv", nrows=100)
+```
+
+---
+
+## skiprows
+
+Skips specific rows.
+
+```python
+df = pd.read_csv("students.csv", skiprows=2)
+```
+
+---
+
+## index_col
+
+Makes a column the index.
+
+```python
+df = pd.read_csv("students.csv", index_col="Roll")
+```
+
+---
+
+## header
+
+Specifies which row should be treated as the header.
+
+```python
+df = pd.read_csv("students.csv", header=1)
+```
+
+---
+
+## names
+
+Assigns custom column names.
+
+```python
+df = pd.read_csv(
+    "students.csv",
+    names=["Student","Age","Marks"]
+)
+```
+
+---
+
+## sep
+
+Changes the separator.
+
+Default separator is comma (,).
+
+If data is separated using "|"
+
+Example
+
+```text
+Name|Age|Marks
+```
+
+Read it like this
+
+```python
+df = pd.read_csv("students.csv", sep="|")
+```
+
+---
+
+## encoding
+
+Used when the file contains special characters.
+
+```python
+df = pd.read_csv("students.csv", encoding="utf-8")
+```
+
+Sometimes
+
+```python
+encoding="latin-1"
+```
+
+---
+
+## chunksize
+
+Used for very large datasets.
+
+```python
+for chunk in pd.read_csv("big.csv", chunksize=10000):
+    print(chunk.head())
+```
+
+Instead of loading the complete file into memory, Pandas reads it in smaller parts.
+
+---
+
+# 20. Common Errors
+
+## FileNotFoundError
+
+Reason
+
+Wrong file path
+
+Solution
+
+Place the CSV file in the correct folder or provide the correct path.
+
+---
+
+## Wrong Separator
+
+Suppose the file uses
+
+```text
+Name|Age|Marks
+```
+
+If you use
+
+```python
+pd.read_csv("students.csv")
+```
+
+Everything will appear in one column.
+
+Solution
+
+```python
+pd.read_csv("students.csv", sep="|")
+```
+
+---
+
+## Encoding Error
+
+Example
+
+```text
+UnicodeDecodeError
+```
+
+Solution
+
+```python
+encoding="utf-8"
+```
+
+or
+
+```python
+encoding="latin-1"
+```
+
+---
+
+# 21. Real Machine Learning Workflow
+
+```
+Problem Statement
+        ↓
+Collect Dataset
+        ↓
+Read CSV using Pandas
+        ↓
+Check Dataset (head, shape, info)
+        ↓
+Handle Missing Values
+        ↓
+Clean Dataset
+        ↓
+Perform EDA
+        ↓
+Feature Engineering
+        ↓
+Train Machine Learning Model
+        ↓
+Evaluate Model
+        ↓
+Deploy Model
+```
+
+---
+
+# 22. Important Interview Questions
+
+1. What is CSV?
+2. What is the full form of CSV?
+3. Why is CSV preferred in Machine Learning?
+4. Difference between CSV and Excel.
+5. What is Pandas?
+6. What is a DataFrame?
+7. What does pd.read_csv() do?
+8. Difference between head() and tail().
+9. What does shape return?
+10. Difference between info() and describe().
+11. What is the use of usecols?
+12. Why do we use index_col?
+13. What is sep?
+14. What is encoding?
+15. What is chunksize?
+16. What is the purpose of iloc()?
+17. How do you check missing values?
+18. How do you check duplicate rows?
+
+---
+
+# Quick Revision
+
+* CSV = Comma Separated Values
+* CSV stores data in rows and columns.
+* Pandas is used to read CSV files.
+* read_csv() loads a CSV into a DataFrame.
+* DataFrame is a table-like data structure.
+* head() shows first rows.
+* tail() shows last rows.
+* shape returns rows and columns.
+* info() provides dataset information.
+* describe() provides statistical summary.
+* isnull() checks missing values.
+* duplicated() checks duplicate rows.
+* iloc() selects rows by position.
+* to_csv() saves data into a CSV file.
+* usecols selects specific columns.
+* nrows limits the number of rows read.
+* skiprows skips rows.
+* index_col sets an index column.
+* header specifies the header row.
+* names assigns custom column names.
+* sep changes the separator.
+* encoding handles character encoding.
+* chunksize reads large files in smaller chunks.
