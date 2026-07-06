@@ -1,0 +1,554 @@
+# 📚 Machine Learning - Data Gathering Notes
+
+# Chapter 2 - Working with JSON & SQL
+
+---
+
+# Part 1 - Working with JSON
+
+## What is JSON?
+
+**JSON (JavaScript Object Notation)** is a lightweight data format used to exchange data between two systems (client ↔ server).
+
+Although its name contains JavaScript, JSON is language-independent and is used in Python, Java, C++, Android, Flutter, Node.js, and many other technologies.
+
+---
+
+## Why do we need JSON?
+
+Suppose we want to send this data:
+
+Name = Utkarsh
+
+Age = 20
+
+City = Lucknow
+
+Skills = Python, Java, ML
+
+CSV is mainly designed for tabular data, but JSON can easily store nested and complex data.
+
+Example JSON:
+
+```json
+{
+  "name": "Utkarsh",
+  "age": 20,
+  "city": "Lucknow",
+  "skills": ["Python", "Java", "ML"]
+}
+```
+
+---
+
+# JSON Structure
+
+JSON stores data as **Key : Value** pairs.
+
+Example:
+
+```json
+{
+  "name": "Utkarsh",
+  "age": 20
+}
+```
+
+Here,
+
+Key → name
+
+Value → Utkarsh
+
+Key → age
+
+Value → 20
+
+---
+
+# JSON Data Types
+
+### String
+
+```json
+"name": "Utkarsh"
+```
+
+### Number
+
+```json
+"age": 20
+```
+
+### Decimal
+
+```json
+"cgpa": 8.6
+```
+
+### Boolean
+
+```json
+"placed": true
+```
+
+### Array (List)
+
+```json
+"skills": ["Python", "Java", "ML"]
+```
+
+### Object
+
+```json
+"address": {
+    "city": "Lucknow",
+    "pin": 226001
+}
+```
+
+### Null
+
+```json
+"salary": null
+```
+
+---
+
+# JSON vs Python Dictionary
+
+Python Dictionary
+
+```python
+student = {
+    "name": "Utkarsh",
+    "age": 20
+}
+```
+
+JSON
+
+```json
+{
+    "name": "Utkarsh",
+    "age": 20
+}
+```
+
+Difference:
+
+* Dictionary is a Python object.
+* JSON is a text-based data format.
+
+---
+
+# Where is JSON used?
+
+JSON is used almost everywhere:
+
+* APIs
+* Web Applications
+* Mobile Apps
+* Cloud Services
+* Machine Learning
+* Data Exchange
+
+Examples:
+
+* YouTube
+* Instagram
+* Swiggy
+* Amazon
+* Google Maps
+* Weather Apps
+
+---
+
+# What is an API?
+
+API = Application Programming Interface
+
+An API allows one application to communicate with another.
+
+Flow:
+
+User
+
+↓
+
+Application
+
+↓
+
+API
+
+↓
+
+Server
+
+↓
+
+JSON Response
+
+↓
+
+Application
+
+---
+
+# Where does the JSON URL come from?
+
+Example:
+
+```python
+pd.read_json("https://api.exchangerate-api.com/v4/latest/INR")
+```
+
+This URL is provided by the API provider in its documentation.
+
+Example:
+
+Weather API
+
+```
+https://api.openweathermap.org/data/2.5/weather
+```
+
+Currency API
+
+```
+https://api.exchangerate-api.com/v4/latest/INR
+```
+
+Developers copy these URLs from the API documentation.
+
+---
+
+# Reading JSON using Pandas
+
+Import Pandas
+
+```python
+import pandas as pd
+```
+
+Read JSON File
+
+```python
+df = pd.read_json("train.json")
+```
+
+Read JSON from API
+
+```python
+df = pd.read_json("https://api.example.com/data")
+```
+
+Flow
+
+JSON File / API
+
+↓
+
+pd.read_json()
+
+↓
+
+DataFrame
+
+---
+
+# Summary of JSON
+
+* JSON = JavaScript Object Notation
+* Stores data in Key : Value format
+* Used by APIs
+* Supports nested data
+* `pd.read_json()` converts JSON into a Pandas DataFrame
+
+========================================================
+
+# Part 2 - Working with SQL
+
+---
+
+# What is SQL?
+
+SQL = Structured Query Language
+
+It is a language used to communicate with databases.
+
+---
+
+# What is a Database?
+
+A database is an organized collection of data.
+
+Example:
+
+| Roll | Name    | CGPA |
+| ---- | ------- | ---- |
+| 1    | Utkarsh | 8.5  |
+| 2    | Rahul   | 7.9  |
+
+Instead of storing millions of records in Excel or CSV, companies store them in databases.
+
+---
+
+# Real World Examples
+
+Amazon stores:
+
+* Customers
+* Orders
+* Products
+* Payments
+
+Netflix stores:
+
+* Users
+* Movies
+* Watch History
+
+Banks store:
+
+* Customer Accounts
+* Transactions
+* Balance
+
+All this data is stored in databases.
+
+---
+
+# What is MySQL?
+
+MySQL is a Database Management System (DBMS).
+
+It stores and manages databases.
+
+Other DBMS examples:
+
+* MySQL
+* PostgreSQL
+* Oracle
+* SQL Server
+* SQLite
+
+---
+
+# Why do we install mysql.connector?
+
+Python cannot directly communicate with MySQL.
+
+We install a connector (bridge).
+
+Installation
+
+```python
+!pip install mysql.connector
+```
+
+Import
+
+```python
+import mysql.connector
+```
+
+---
+
+# Connecting Python to MySQL
+
+```python
+conn = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="",
+    database="world"
+)
+```
+
+Explanation:
+
+host → Database location
+
+localhost = Database is running on the same computer.
+
+user → Database username
+
+password → Database password
+
+database → Database name
+
+After this, Python gets connected to MySQL.
+
+---
+
+# Reading Data from SQL
+
+```python
+df = pd.read_sql_query(
+    "SELECT * FROM countrylanguage",
+    conn
+)
+```
+
+Here,
+
+SQL Query
+
+```sql
+SELECT * FROM countrylanguage;
+```
+
+Connection Object
+
+```python
+conn
+```
+
+The database executes the query and Pandas converts the result into a DataFrame.
+
+---
+
+# Understanding SQL Query
+
+### SELECT
+
+Means → Retrieve data
+
+### *
+
+Means → All columns
+
+### FROM
+
+Means → From which table
+
+### countrylanguage
+
+Table name
+
+Meaning:
+
+Bring all rows and all columns from the countrylanguage table.
+
+---
+
+# More SQL Examples
+
+### Select only Name
+
+```sql
+SELECT Name
+FROM country;
+```
+
+---
+
+### Select two columns
+
+```sql
+SELECT Name, Population
+FROM country;
+```
+
+---
+
+### Find only India
+
+```sql
+SELECT *
+FROM country
+WHERE Name='India';
+```
+
+---
+
+# Complete Data Flow
+
+CSV
+
+CSV File
+
+↓
+
+pd.read_csv()
+
+↓
+
+DataFrame
+
+---
+
+JSON
+
+JSON File / API
+
+↓
+
+pd.read_json()
+
+↓
+
+DataFrame
+
+---
+
+SQL
+
+Database
+
+↓
+
+SQL Query
+
+↓
+
+pd.read_sql_query()
+
+↓
+
+DataFrame
+
+---
+
+# When to Use What?
+
+| Data Source     | Pandas Function     |
+| --------------- | ------------------- |
+| CSV File        | pd.read_csv()       |
+| JSON File / API | pd.read_json()      |
+| SQL Database    | pd.read_sql_query() |
+
+---
+
+# Interview Questions
+
+1. What is JSON?
+2. What is SQL?
+3. Difference between JSON and CSV.
+4. What is an API?
+5. Where do API URLs come from?
+6. What is MySQL?
+7. Why do we use mysql.connector?
+8. What is localhost?
+9. What does SELECT * mean?
+10. Difference between read_csv(), read_json(), and read_sql_query().
+
+---
+
+# Final Revision
+
+CSV → Data stored in files → `pd.read_csv()`
+
+JSON → Data from APIs or JSON files → `pd.read_json()`
+
+SQL → Data from databases → `pd.read_sql_query()`
+
+Remember:
+
+**CSV = File**
+
+**JSON = API / JSON File**
+
+**SQL = Database**
