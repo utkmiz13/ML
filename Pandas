@@ -1,0 +1,221 @@
+Module 1: Introduction to Pandas
+Definition
+
+Pandas is an open-source Python library used for reading, organizing, cleaning, analyzing, manipulating, and storing data in a tabular format.
+
+Why Pandas?
+Easy to work with data
+Read CSV/Excel files
+Clean missing values
+Filter and sort data
+Perform calculations
+Prepare data for Machine Learning
+Installation
+pip install pandas
+Import
+import pandas as pd
+Module 2: Series
+Definition
+
+A Series is a one-dimensional labeled array capable of storing any type of data.
+
+Create Series
+import pandas as pd
+
+s = pd.Series([10,20,30,40])
+print(s)
+Custom Index
+s = pd.Series([90,80,70],index=["Math","Science","English"])
+Access Data
+s[0]
+s["Math"]
+Module 3: DataFrame
+Definition
+
+A DataFrame is a two-dimensional table consisting of rows and columns.
+
+Create DataFrame
+data={
+    "Name":["Utkarsh","Rahul","Aman"],
+    "Age":[20,21,19]
+}
+
+df=pd.DataFrame(data)
+Display DataFrame
+print(df)
+Module 4: Reading Files
+CSV
+df=pd.read_csv("student.csv")
+Excel
+df=pd.read_excel("student.xlsx")
+JSON
+df=pd.read_json("student.json")
+Module 5: Inspecting Data
+First Rows
+df.head()
+Last Rows
+df.tail()
+Random Rows
+df.sample()
+Shape
+df.shape
+Columns
+df.columns
+Index
+df.index
+Data Types
+df.dtypes
+Information
+df.info()
+Statistics
+df.describe()
+Module 6: Selecting Data
+Single Column
+df["Name"]
+Multiple Columns
+df[["Name","Age"]]
+Row using iloc
+df.iloc[0]
+Multiple Rows
+df.iloc[0:5]
+Row using loc
+df.loc[0]
+Module 7: Filtering Data
+Age > 18
+df[df["Age"]>18]
+Equal Condition
+df[df["City"]=="Lucknow"]
+Multiple Conditions
+df[(df["Age"]>18) & (df["Marks"]>80)]
+Module 8: Sorting
+Ascending
+df.sort_values("Age")
+Descending
+df.sort_values("Age",ascending=False)
+Module 9: Add Column
+df["Salary"]=[10000,20000,30000]
+Calculate Column
+df["Total"]=df["Math"]+df["Science"]
+Module 10: Delete Data
+Delete Column
+df.drop("Age",axis=1)
+Delete Row
+df.drop(0)
+Module 11: Missing Values
+Check Missing Values
+df.isnull()
+Count Missing Values
+df.isnull().sum()
+Remove Missing Values
+df.dropna()
+Fill Missing Values
+df.fillna(0)
+Module 12: Duplicate Values
+Find Duplicates
+df.duplicated()
+Remove Duplicates
+df.drop_duplicates()
+Module 13: Rename
+Rename Column
+df.rename(columns={"Age":"Student_Age"})
+Module 14: Mathematical Functions
+Sum
+df["Marks"].sum()
+Mean
+df["Marks"].mean()
+Maximum
+df["Marks"].max()
+Minimum
+df["Marks"].min()
+Count
+df["Marks"].count()
+Median
+df["Marks"].median()
+Mode
+df["Marks"].mode()
+Standard Deviation
+df["Marks"].std()
+Module 15: GroupBy
+Average Marks by City
+df.groupby("City")["Marks"].mean()
+Count Students
+df.groupby("City").count()
+Module 16: Merge
+Merge Two DataFrames
+pd.merge(df1,df2,on="ID")
+Module 17: Concat
+pd.concat([df1,df2])
+Module 18: String Functions
+Upper
+df["Name"].str.upper()
+Lower
+df["Name"].str.lower()
+Replace
+df["Name"].str.replace("A","X")
+Contains
+df["Name"].str.contains("Ut")
+Module 19: Date Time
+df["Date"]=pd.to_datetime(df["Date"])
+Year
+df["Date"].dt.year
+Month
+df["Date"].dt.month
+Day
+df["Date"].dt.day
+Module 20: Apply Function
+df["Age"]=df["Age"].apply(lambda x:x+1)
+Module 21: Pivot Table
+pd.pivot_table(df,index="City",values="Marks",aggfunc="mean")
+Module 22: Export Data
+CSV
+df.to_csv("output.csv",index=False)
+Excel
+df.to_excel("output.xlsx",index=False)
+⭐ Most Important Functions (Must Remember)
+import pandas as pd
+
+pd.read_csv()
+pd.read_excel()
+
+head()
+tail()
+sample()
+
+shape
+columns
+index
+dtypes
+info()
+describe()
+
+loc[]
+iloc[]
+
+sort_values()
+
+isnull()
+dropna()
+fillna()
+
+duplicated()
+drop_duplicates()
+
+rename()
+
+groupby()
+
+merge()
+concat()
+
+sum()
+mean()
+max()
+min()
+count()
+
+apply()
+
+pivot_table()
+
+to_csv()
+to_excel()
