@@ -1,0 +1,13 @@
+import csv
+import requests
+from io import StringIO
+
+url = "https://raw.githubusercontent.com/laxmimerit/All-CSV-ML-Data-Files-Download/master/IMDB-Movie-Data.csv"
+
+response = requests.get(url)
+response.raise_for_status()
+
+data = csv.reader(StringIO(response.text))
+
+for row in data:
+    print(row)
