@@ -10,12 +10,16 @@ The values are separated by commas (,).
 
 Example:
 
+
+
 ```text
 Name,Age,Marks
 Utkarsh,20,95
 Rahul,21,88
 Aman,19,91
 ```
+
+
 
 In the above example:
 
@@ -44,6 +48,13 @@ Common ML datasets in CSV format:
 * Diabetes Dataset
 * Placement Dataset
 
+
+
+
+
+
+
+
 ---
 
 # 3. CSV vs Excel
@@ -57,6 +68,9 @@ Common ML datasets in CSV format:
 | Mostly used in ML | Mostly used in Business |
 
 ---
+
+
+
 
 # 4. Structure of a CSV File
 
